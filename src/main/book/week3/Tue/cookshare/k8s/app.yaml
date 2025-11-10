@@ -1,0 +1,144 @@
+# CookShare Web Application Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: cookshare-web-service
+  namespace: cookshare-local
+  labels:
+    app: cookshare-web
+    environment: local
+spec:
+  selector:
+    app: cookshare-web
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+  type: ClusterIP
+---
+# CookShare Web Application Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cookshare-web-deployment
+  namespace: cookshare-local
+  labels:
+    app: cookshare-web
+    environment: local
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cookshare-web
+  template:
+    metadata:
+      labels:
+        app: cookshare-web
+    spec:
+      containers:
+        - name: cookshare-web
+          image: cookshare-web:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            # 데이터베이스 연결 정보
+            - name: DATABASE_URL
+              value: "postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@$(DATABASE_HOST):$(DATABASE_PORT)/$(DATABASE_NAME)"
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: DATABASE_HOST
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: DATABASE_PORT
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: DATABASE_NAME
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: cookshare-secrets
+                  key: postgres-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cookshare-secrets
+                  key: postgres-password
+            
+            # 애플리케이션 설정
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: NODE_ENV
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: APP_PORT
+            - name: HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: APP_HOST
+            
+            # JWT 및 세션 설정
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cookshare-secrets
+                  key: jwt-secret
+            - name: SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: cookshare-secrets
+                  key: session-secret
+            
+            # 기타 설정
+            - name: API_VERSION
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: API_VERSION
+            - name: LOG_LEVEL
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: LOG_LEVEL
+            - name: CORS_ORIGIN
+              valueFrom:
+                configMapKeyRef:
+                  name: cookshare-config
+                  key: CORS_ORIGIN
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 1
+            failureThreshold: 3
+      restartPolicy: Always

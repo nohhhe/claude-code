@@ -1,0 +1,36 @@
+{
+  "name": "@shopping-mall/web",
+  "version": "1.0.0",
+  "description": "Next.js frontend for online shopping mall",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --port 3100",
+    "build": "next build",
+    "start": "node /app/node_modules/.pnpm/next@14.0.0_react-dom@18.2.0_react@18.2.0/node_modules/next/dist/bin/next start --port 3100",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next dist"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@shopping-mall/shared": "workspace:*",
+    "@shopping-mall/ui": "workspace:*",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "typescript": "^5.0.0",
+    "tailwindcss": "^3.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

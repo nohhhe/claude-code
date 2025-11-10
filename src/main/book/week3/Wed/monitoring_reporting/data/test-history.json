@@ -1,0 +1,392 @@
+[
+  {
+    "timestamp": "2025-08-10T18:19:04.679Z",
+    "passRate": "93.27",
+    "totalTests": 49,
+    "failedTests": 3,
+    "coverage": {
+      "statements": 90,
+      "branches": 75,
+      "functions": 81,
+      "lines": 83
+    },
+    "totalTime": 7703
+  },
+  {
+    "timestamp": "2025-08-11T18:19:04.679Z",
+    "passRate": "89.73",
+    "totalTests": 45,
+    "failedTests": 4,
+    "coverage": {
+      "statements": 82,
+      "branches": 74,
+      "functions": 91,
+      "lines": 78
+    },
+    "totalTime": 5252
+  },
+  {
+    "timestamp": "2025-08-12T18:19:04.679Z",
+    "passRate": "89.79",
+    "totalTests": 50,
+    "failedTests": 5,
+    "coverage": {
+      "statements": 77,
+      "branches": 82,
+      "functions": 87,
+      "lines": 82
+    },
+    "totalTime": 7194
+  },
+  {
+    "timestamp": "2025-08-13T18:19:04.679Z",
+    "passRate": "91.07",
+    "totalTests": 53,
+    "failedTests": 4,
+    "coverage": {
+      "statements": 89,
+      "branches": 73,
+      "functions": 85,
+      "lines": 90
+    },
+    "totalTime": 6082
+  },
+  {
+    "timestamp": "2025-08-14T18:19:04.679Z",
+    "passRate": "94.09",
+    "totalTests": 47,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 76,
+      "branches": 84,
+      "functions": 85,
+      "lines": 91
+    },
+    "totalTime": 5536
+  },
+  {
+    "timestamp": "2025-08-15T18:19:04.679Z",
+    "passRate": "91.47",
+    "totalTests": 51,
+    "failedTests": 4,
+    "coverage": {
+      "statements": 76,
+      "branches": 77,
+      "functions": 81,
+      "lines": 78
+    },
+    "totalTime": 5792
+  },
+  {
+    "timestamp": "2025-08-16T18:19:04.679Z",
+    "passRate": "93.79",
+    "totalTests": 54,
+    "failedTests": 3,
+    "coverage": {
+      "statements": 79,
+      "branches": 86,
+      "functions": 90,
+      "lines": 86
+    },
+    "totalTime": 6955
+  },
+  {
+    "timestamp": "2025-08-17T18:19:04.679Z",
+    "passRate": "91.29",
+    "totalTests": 51,
+    "failedTests": 4,
+    "coverage": {
+      "statements": 82,
+      "branches": 73,
+      "functions": 85,
+      "lines": 87
+    },
+    "totalTime": 7906
+  },
+  {
+    "timestamp": "2025-08-18T18:19:04.679Z",
+    "passRate": "93.89",
+    "totalTests": 51,
+    "failedTests": 3,
+    "coverage": {
+      "statements": 92,
+      "branches": 70,
+      "functions": 92,
+      "lines": 86
+    },
+    "totalTime": 7409
+  },
+  {
+    "timestamp": "2025-08-19T18:19:04.679Z",
+    "passRate": "93.22",
+    "totalTests": 51,
+    "failedTests": 3,
+    "coverage": {
+      "statements": 78,
+      "branches": 79,
+      "functions": 83,
+      "lines": 94
+    },
+    "totalTime": 7396
+  },
+  {
+    "timestamp": "2025-08-20T18:19:04.679Z",
+    "passRate": "94.61",
+    "totalTests": 52,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 75,
+      "branches": 73,
+      "functions": 87,
+      "lines": 90
+    },
+    "totalTime": 7535
+  },
+  {
+    "timestamp": "2025-08-21T18:19:04.679Z",
+    "passRate": "94.78",
+    "totalTests": 50,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 89,
+      "branches": 74,
+      "functions": 81,
+      "lines": 78
+    },
+    "totalTime": 6792
+  },
+  {
+    "timestamp": "2025-08-22T18:19:04.679Z",
+    "passRate": "92.06",
+    "totalTests": 47,
+    "failedTests": 3,
+    "coverage": {
+      "statements": 91,
+      "branches": 76,
+      "functions": 92,
+      "lines": 86
+    },
+    "totalTime": 7499
+  },
+  {
+    "timestamp": "2025-08-23T18:19:04.679Z",
+    "passRate": "86.83",
+    "totalTests": 54,
+    "failedTests": 7,
+    "coverage": {
+      "statements": 91,
+      "branches": 72,
+      "functions": 91,
+      "lines": 87
+    },
+    "totalTime": 5805
+  },
+  {
+    "timestamp": "2025-08-24T18:19:04.679Z",
+    "passRate": "89.52",
+    "totalTests": 50,
+    "failedTests": 5,
+    "coverage": {
+      "statements": 90,
+      "branches": 89,
+      "functions": 81,
+      "lines": 83
+    },
+    "totalTime": 7895
+  },
+  {
+    "timestamp": "2025-08-25T18:19:04.679Z",
+    "passRate": "91.07",
+    "totalTests": 45,
+    "failedTests": 4,
+    "coverage": {
+      "statements": 78,
+      "branches": 89,
+      "functions": 88,
+      "lines": 84
+    },
+    "totalTime": 6536
+  },
+  {
+    "timestamp": "2025-08-26T18:19:04.679Z",
+    "passRate": "94.54",
+    "totalTests": 50,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 92,
+      "branches": 82,
+      "functions": 83,
+      "lines": 91
+    },
+    "totalTime": 5772
+  },
+  {
+    "timestamp": "2025-08-27T18:19:04.679Z",
+    "passRate": "90.20",
+    "totalTests": 47,
+    "failedTests": 4,
+    "coverage": {
+      "statements": 89,
+      "branches": 84,
+      "functions": 94,
+      "lines": 93
+    },
+    "totalTime": 6399
+  },
+  {
+    "timestamp": "2025-08-28T18:19:04.679Z",
+    "passRate": "85.30",
+    "totalTests": 46,
+    "failedTests": 6,
+    "coverage": {
+      "statements": 91,
+      "branches": 85,
+      "functions": 92,
+      "lines": 91
+    },
+    "totalTime": 6340
+  },
+  {
+    "timestamp": "2025-08-29T18:19:04.679Z",
+    "passRate": "87.97",
+    "totalTests": 52,
+    "failedTests": 6,
+    "coverage": {
+      "statements": 77,
+      "branches": 84,
+      "functions": 83,
+      "lines": 82
+    },
+    "totalTime": 5030
+  },
+  {
+    "timestamp": "2025-08-30T18:19:04.679Z",
+    "passRate": "93.85",
+    "totalTests": 50,
+    "failedTests": 3,
+    "coverage": {
+      "statements": 93,
+      "branches": 70,
+      "functions": 81,
+      "lines": 87
+    },
+    "totalTime": 5428
+  },
+  {
+    "timestamp": "2025-08-31T18:19:04.679Z",
+    "passRate": "89.68",
+    "totalTests": 52,
+    "failedTests": 5,
+    "coverage": {
+      "statements": 87,
+      "branches": 82,
+      "functions": 81,
+      "lines": 81
+    },
+    "totalTime": 7046
+  },
+  {
+    "timestamp": "2025-09-01T18:19:04.679Z",
+    "passRate": "94.83",
+    "totalTests": 51,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 82,
+      "branches": 76,
+      "functions": 93,
+      "lines": 85
+    },
+    "totalTime": 7964
+  },
+  {
+    "timestamp": "2025-09-02T18:19:04.679Z",
+    "passRate": "88.35",
+    "totalTests": 52,
+    "failedTests": 6,
+    "coverage": {
+      "statements": 89,
+      "branches": 75,
+      "functions": 81,
+      "lines": 84
+    },
+    "totalTime": 7739
+  },
+  {
+    "timestamp": "2025-09-03T18:19:04.679Z",
+    "passRate": "90.61",
+    "totalTests": 48,
+    "failedTests": 4,
+    "coverage": {
+      "statements": 86,
+      "branches": 81,
+      "functions": 82,
+      "lines": 80
+    },
+    "totalTime": 7763
+  },
+  {
+    "timestamp": "2025-09-04T18:19:04.679Z",
+    "passRate": "94.31",
+    "totalTests": 48,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 82,
+      "branches": 72,
+      "functions": 94,
+      "lines": 91
+    },
+    "totalTime": 5047
+  },
+  {
+    "timestamp": "2025-09-05T18:19:04.679Z",
+    "passRate": "88.10",
+    "totalTests": 54,
+    "failedTests": 6,
+    "coverage": {
+      "statements": 81,
+      "branches": 75,
+      "functions": 84,
+      "lines": 89
+    },
+    "totalTime": 5682
+  },
+  {
+    "timestamp": "2025-09-06T18:19:04.679Z",
+    "passRate": "94.41",
+    "totalTests": 48,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 92,
+      "branches": 83,
+      "functions": 93,
+      "lines": 84
+    },
+    "totalTime": 7119
+  },
+  {
+    "timestamp": "2025-09-07T18:19:04.679Z",
+    "passRate": "85.96",
+    "totalTests": 53,
+    "failedTests": 7,
+    "coverage": {
+      "statements": 75,
+      "branches": 78,
+      "functions": 93,
+      "lines": 81
+    },
+    "totalTime": 6066
+  },
+  {
+    "timestamp": "2025-09-08T18:19:04.679Z",
+    "passRate": "94.88",
+    "totalTests": 47,
+    "failedTests": 2,
+    "coverage": {
+      "statements": 94,
+      "branches": 72,
+      "functions": 85,
+      "lines": 80
+    },
+    "totalTime": 5726
+  }
+]

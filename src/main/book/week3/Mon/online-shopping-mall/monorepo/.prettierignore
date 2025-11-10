@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+.nuxt/
+out/
+storybook-static/
+
+# Generated files
+coverage/
+*.tsbuildinfo
+.eslintcache
+
+# Package manager files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Environment files
+.env*
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+
+# Git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github/
+
+# Specific file types that shouldn't be formatted
+*.min.js
+*.min.css
+*.bundle.js
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.ico
+*.woff
+*.woff2
+*.ttf
+*.eot

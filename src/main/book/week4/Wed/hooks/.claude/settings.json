@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "date >> last_prompting_history.log"
+          }
+        ]
+      }
+    ]
+  }
+}

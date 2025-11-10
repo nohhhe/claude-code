@@ -1,0 +1,64 @@
+{
+  "folders": [
+    {
+      "name": "Root",
+      "path": "."
+    },
+    {
+      "name": "Services",
+      "path": "./services"
+    },
+    {
+      "name": "Packages",
+      "path": "./packages"
+    },
+    {
+      "name": "Apps",
+      "path": "./apps"
+    },
+    {
+      "name": "User Service",
+      "path": "./services/user"
+    },
+    {
+      "name": "Product Service", 
+      "path": "./services/product"
+    },
+    {
+      "name": "Order Service",
+      "path": "./services/order"
+    },
+    {
+      "name": "Payment Service",
+      "path": "./services/payment"
+    },
+    {
+      "name": "Web App",
+      "path": "./apps/web"
+    },
+    {
+      "name": "Admin App",
+      "path": "./apps/admin"
+    }
+  ],
+  "settings": {
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.workspaceSymbols.scope": "allOpenProjects",
+    "eslint.workingDirectories": [
+      "./",
+      "./services/*",
+      "./packages/*", 
+      "./apps/*"
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode.vscode-typescript-next",
+      "esbenp.prettier-vscode",
+      "dbaeumer.vscode-eslint",
+      "bradlc.vscode-tailwindcss",
+      "ms-vscode.vscode-docker",
+      "eamodio.gitlens"
+    ]
+  }
+}

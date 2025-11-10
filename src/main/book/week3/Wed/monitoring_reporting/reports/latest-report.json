@@ -1,0 +1,79 @@
+{
+  "timestamp": "2025-09-08T18:19:04.679Z",
+  "summary": {
+    "totalTests": 52,
+    "passedTests": 47,
+    "failedTests": 5,
+    "skippedTests": 0,
+    "passRate": "90.38",
+    "totalTime": 6847
+  },
+  "coverage": {
+    "statements": 89.5,
+    "branches": 85.2,
+    "functions": 92.1,
+    "lines": 88.7
+  },
+  "testResults": [
+    {
+      "testFilePath": "./tests/user.test.js",
+      "numFailingTests": 2,
+      "numPassingTests": 8,
+      "numPendingTests": 0,
+      "perfStats": {
+        "runtime": 1245
+      },
+      "testResults": [
+        {
+          "ancestorTitles": [
+            "User Service"
+          ],
+          "title": "should create user successfully",
+          "status": "passed",
+          "duration": 45
+        },
+        {
+          "ancestorTitles": [
+            "User Service"
+          ],
+          "title": "should validate email format",
+          "status": "failed",
+          "duration": 78,
+          "failureMessages": [
+            "Expected email validation to fail for invalid format"
+          ]
+        }
+      ]
+    },
+    {
+      "testFilePath": "./tests/auth.test.js",
+      "numFailingTests": 1,
+      "numPassingTests": 12,
+      "numPendingTests": 0,
+      "perfStats": {
+        "runtime": 2134
+      },
+      "testResults": [
+        {
+          "ancestorTitles": [
+            "Authentication"
+          ],
+          "title": "should login with valid credentials",
+          "status": "passed",
+          "duration": 123
+        },
+        {
+          "ancestorTitles": [
+            "Authentication"
+          ],
+          "title": "should handle token expiration",
+          "status": "failed",
+          "duration": 67,
+          "failureMessages": [
+            "Token expiration not handled correctly"
+          ]
+        }
+      ]
+    }
+  ]
+}

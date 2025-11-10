@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unoptimized Webpack Demo</title>
+<script defer src="bundle.js"></script></head>
+<body>
+    <div class="container">
+        <h1>Webpack Optimization Demo</h1>
+        <p>This project has many optimization opportunities!</p>
+        
+        <div class="features">
+            <h2>Features to demonstrate:</h2>
+            <ul>
+                <li>Large dependencies (moment.js, lodash, bootstrap)</li>
+                <li>Unused code imports</li>
+                <li>No code splitting</li>
+                <li>No tree shaking</li>
+                <li>Large bundle size</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h3>Chart Demo</h3>
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+
+        <div class="demo-section">
+            <h3>Date Demo</h3>
+            <p id="current-time"></p>
+        </div>
+
+        <div class="demo-section">
+            <h3>Utilities Demo</h3>
+            <button id="test-btn" class="btn btn-primary">Test Utilities</button>
+            <p id="result"></p>
+        </div>
+    </div>
+</body>
+</html>

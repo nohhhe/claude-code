@@ -1,0 +1,58 @@
+# Production Docker Compose Configuration
+# This is for production deployment only
+# For development, use: docker-compose -f docker-compose.dev.yml up
+
+services:
+  # Frontend Only (Next.js)
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile
+      target: production
+    container_name: cookshare-web-prod
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:3001/api
+    networks:
+      - cookshare-network
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: cookshare-postgres-prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cookshare_prod
+      POSTGRES_USER: cookshare
+      POSTGRES_PASSWORD: cookshare_prod_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - cookshare-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: cookshare-redis-prod
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - cookshare-network
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  cookshare-network:
+    driver: bridge

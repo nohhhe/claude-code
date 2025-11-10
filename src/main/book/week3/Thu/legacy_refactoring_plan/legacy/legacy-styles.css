@@ -1,0 +1,277 @@
+/* Legacy CSS - 인라인 스타일, !important 남용, 비효율적인 선택자 */
+
+/* 전역 스타일 리셋 없음 - 브라우저별 차이 발생 */
+* {
+    font-family: Arial, sans-serif !important;
+}
+
+body {
+    margin: 0px !important;
+    padding: 20px !important;
+    background-color: #f5f5f5 !important;
+    font-size: 14px !important;
+}
+
+/* ID 선택자 남용 */
+#container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    background-color: white !important;
+    padding: 20px !important;
+    border-radius: 5px !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+}
+
+/* 인라인 스타일 혼재 */
+header {
+    background-color: #333 !important;
+    color: white !important;
+    padding: 15px !important;
+    margin-bottom: 20px !important;
+    border-radius: 5px !important;
+}
+
+header h1 {
+    margin: 0 !important;
+    display: inline-block !important;
+}
+
+/* 비효율적인 선택자 */
+#container header #user-info {
+    float: right !important;
+    margin-top: 5px !important;
+}
+
+#user-info span {
+    margin-right: 10px !important;
+    color: #ccc !important;
+}
+
+#user-info button {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: none !important;
+    padding: 5px 10px !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+}
+
+/* 섹션별 스타일 - 일관성 없는 패턴 */
+section {
+    margin-bottom: 30px !important;
+    border: 1px solid #ddd !important;
+    padding: 20px !important;
+    border-radius: 5px !important;
+}
+
+section h2 {
+    color: #333 !important;
+    border-bottom: 2px solid #007bff !important;
+    padding-bottom: 10px !important;
+    margin-top: 0 !important;
+}
+
+/* 폼 스타일 - 하드코딩된 값들 */
+form {
+    margin-bottom: 20px !important;
+}
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], select {
+    padding: 8px !important;
+    margin: 5px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    width: 200px !important;
+}
+
+/* 버튼 스타일 - 클래스 없이 타입 선택자만 사용 */
+button {
+    background-color: #007bff !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    margin: 5px !important;
+    font-size: 14px !important;
+}
+
+button:hover {
+    background-color: #0056b3 !important;
+}
+
+button:disabled {
+    background-color: #6c757d !important;
+    cursor: not-allowed !important;
+}
+
+/* 주문 관련 스타일 */
+#current-order {
+    background-color: #f8f9fa !important;
+    padding: 15px !important;
+    margin: 20px 0 !important;
+    border-radius: 5px !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+#order-items {
+    margin-bottom: 15px !important;
+}
+
+.order-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px !important;
+    margin: 5px 0 !important;
+    background-color: white !important;
+    border: 1px solid #e9ecef !important;
+    border-radius: 3px !important;
+}
+
+.order-item span {
+    flex: 1 !important;
+}
+
+.order-item button {
+    background-color: #dc3545 !important;
+    padding: 5px 8px !important;
+    font-size: 12px !important;
+    margin-left: 10px !important;
+}
+
+#order-total {
+    font-weight: bold !important;
+    font-size: 16px !important;
+    text-align: right !important;
+    color: #28a745 !important;
+    margin-bottom: 10px !important;
+}
+
+/* 사용자 목록 스타일 */
+#user-list {
+    margin-top: 20px !important;
+}
+
+.user-item {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 8px !important;
+    margin: 5px 0 !important;
+    background-color: #f8f9fa !important;
+    border-radius: 3px !important;
+}
+
+.user-item span {
+    flex: 1 !important;
+}
+
+.user-item button {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+}
+
+/* 주문 내역 스타일 */
+#order-list {
+    max-height: 400px !important;
+    overflow-y: auto !important;
+}
+
+#order-list .order-item {
+    display: block !important;
+    margin-bottom: 15px !important;
+    padding: 15px !important;
+    background-color: #fff !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 5px !important;
+}
+
+#order-list .order-item h4 {
+    margin: 0 0 10px 0 !important;
+    color: #007bff !important;
+}
+
+#order-list .order-item .status {
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+#order-list .order-item ul {
+    margin: 10px 0 !important;
+    padding-left: 20px !important;
+}
+
+#order-list .order-item li {
+    margin: 5px 0 !important;
+}
+
+/* 상태별 색상 - 하드코딩 */
+.status[data-status="pending"], #order-list .order-item .status:contains("pending") {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+}
+
+.status[data-status="completed"], #order-list .order-item .status:contains("completed") {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.status[data-status="cancelled"], #order-list .order-item .status:contains("cancelled") {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* 관리자 패널 - 숨김 처리 */
+#admin-panel {
+    display: none !important;
+    background-color: #ffe6e6 !important;
+    border: 2px solid #ffcccc !important;
+    padding: 15px !important;
+    margin: 20px 0 !important;
+    border-radius: 5px !important;
+}
+
+#admin-panel h3 {
+    color: #d63384 !important;
+    margin-top: 0 !important;
+}
+
+/* 반응형 스타일 없음 - 모바일 대응 안됨 */
+/* 미디어 쿼리 없음 */
+
+/* 플렉스박스나 그리드 사용 안함 - float 기반 레이아웃 */
+.clearfix::after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
+}
+
+/* 브라우저 호환성 고려 안함 */
+/* -webkit-, -moz- prefix 없음 */
+
+/* 폰트 로딩 최적화 없음 */
+/* 이미지 최적화 없음 */
+
+/* 접근성 고려 안됨 */
+/* focus 스타일 부족 */
+input:focus, select:focus, button:focus {
+    outline: 2px solid #007bff !important;
+    outline-offset: 2px !important;
+}
+
+/* 에러/성공 메시지 스타일 없음 - alert()만 사용 */
+
+/* 애니메이션이나 트랜지션 없음 */
+/* 로딩 상태 표시 없음 */
+
+/* CSS 변수 사용 안함 */
+/* CSS 모듈이나 전처리기 사용 안함 */
+
+/* 성능 최적화 안됨 - 모든 스타일에 !important */
+/* 코드 재사용성 낮음 */

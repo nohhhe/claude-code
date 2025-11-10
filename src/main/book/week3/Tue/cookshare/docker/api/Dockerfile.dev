@@ -1,0 +1,42 @@
+# Multi-stage build for API development
+FROM node:20-alpine AS base
+
+# Install pnpm and nodemon for development
+RUN npm install -g pnpm@8.15.0 nodemon
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/*/package.json ./packages/*/
+COPY apps/api/package.json ./apps/api/
+
+# Install all dependencies
+RUN pnpm install --frozen-lockfile
+
+# Development stage
+FROM base AS development
+
+# Copy shared packages
+COPY packages/ ./packages/
+
+# Copy API source code
+COPY apps/api/ ./
+
+# Set environment variables
+ENV NODE_ENV=development
+
+# Expose port
+EXPOSE 3001
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S apiuser -u 1001
+
+# Change ownership
+RUN chown -R apiuser:nodejs /app
+USER apiuser
+
+# Start development server with hot reload using nodemon
+CMD ["nodemon", "--watch", "src", "--ext", "ts,js", "--exec", "node", "--loader", "ts-node/esm", "src/index.ts"]

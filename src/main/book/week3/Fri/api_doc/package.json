@@ -1,0 +1,59 @@
+{
+  "name": "api-doc-generator-example",
+  "version": "1.0.0",
+  "description": "Express.js API with automatic OpenAPI documentation generation",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "generate-docs": "node utils/openapi-generator.js",
+    "serve-docs": "node swagger-ui-server.js",
+    "demo": "node scripts/demo.js",
+    "docs": "npm run generate-docs && npm run serve-docs",
+    "test": "jest --passWithNoTests",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "express",
+    "openapi",
+    "swagger",
+    "api-documentation",
+    "rest-api",
+    "auto-generation"
+  ],
+  "author": "API Doc Generator Example",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.0",
+    "helmet": "^8.0.0",
+    "js-yaml": "^4.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^10.0.0",
+    "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "eslint": "^9.17.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.7",
+    "supertest": "^7.0.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/api-doc-generator-example.git"
+  },
+  "bugs": {
+    "url": "https://github.com/example/api-doc-generator-example/issues"
+  },
+  "homepage": "https://github.com/example/api-doc-generator-example#readme"
+}

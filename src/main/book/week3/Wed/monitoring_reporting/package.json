@@ -1,0 +1,28 @@
+{
+  "name": "test-monitoring-dashboard",
+  "version": "1.0.0",
+  "description": "테스트 모니터링 및 리포팅 대시보드",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage --json --outputFile=test-results.json",
+    "test:watch": "jest --watch --coverage",
+    "start": "node server.js",
+    "build": "npm test && npm run generate-report",
+    "generate-report": "node scripts/generate-report.js"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "@jest/globals": "^29.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": ["json", "lcov", "text", "html"],
+    "testResultsProcessor": "./scripts/test-processor.js"
+  }
+}

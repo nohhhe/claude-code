@@ -1,0 +1,56 @@
+{
+  "entryPoints": ["src/api"],
+  "out": "docs",
+  "theme": "default",
+  "name": "API Documentation",
+  "readme": "README.md",
+  "includeVersion": true,
+  "excludeExternals": true,
+  "excludePrivate": false,
+  "excludeProtected": false,
+  "disableSources": false,
+  
+  "gitRevision": "main",
+  "plugin": [
+    "typedoc-plugin-markdown"
+  ],
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Services",
+    "Types",
+    "Errors",
+    "Interfaces",
+    "Classes"
+  ],
+  "sort": [
+    "source-order"
+  ],
+  "kindSortOrder": [
+    "Class",
+    "Interface",
+    "TypeAlias",
+    "Function",
+    "Variable"
+  ],
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "treatWarningsAsErrors": false,
+  "cleanOutputDir": true,
+  "titleLink": "https://github.com/example/api-docs",
+  "navigationLinks": {
+    "GitHub": "https://github.com/example/api-docs",
+    "API Reference": "./index.html"
+  },
+  "sidebarLinks": {
+    "Getting Started": "https://github.com/example/api-docs#getting-started",
+    "Examples": "https://github.com/example/api-docs#examples"
+  },
+  
+  "markedOptions": {
+    "mangle": false
+  },
+  "searchInComments": true
+}

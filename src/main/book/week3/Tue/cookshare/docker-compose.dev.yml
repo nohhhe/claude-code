@@ -1,0 +1,158 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: cookshare-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: cookshare_dev
+      POSTGRES_USER: cookshare
+      POSTGRES_PASSWORD: cookshare_dev_password
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d
+      - ./docker/postgres/seed:/tmp/seed
+    networks:
+      - cookshare-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cookshare -d cookshare_dev"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: cookshare-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - cookshare-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Web Application (Next.js)
+  web:
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile.dev
+      target: development
+    container_name: cookshare-web-dev
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+      - DATABASE_URL=postgresql://cookshare:cookshare_dev_password@postgres:5432/cookshare_dev
+      - REDIS_URL=redis://redis:6379
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+      - HOSTNAME=0.0.0.0
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+      - /app/apps/web/.next
+    networks:
+      - cookshare-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+  # API Server (if needed for backend) - DISABLED: apps/api directory not found
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/api/Dockerfile.dev
+  #     target: development
+  #   container_name: cookshare-api-dev
+  #   restart: unless-stopped
+  #   environment:
+  #     - NODE_ENV=development
+  #     - PORT=3001
+  #     - DATABASE_URL=postgresql://cookshare:cookshare_dev_password@postgres:5432/cookshare_dev
+  #     - REDIS_URL=redis://redis:6379
+  #     - JWT_SECRET=dev_jwt_secret_key
+  #     - CORS_ORIGIN=http://localhost:3000
+  #   ports:
+  #     - "3001:3001"
+  #   volumes:
+  #     - ./apps/api:/app
+  #     - /app/node_modules
+  #     - ./packages:/packages
+  #   networks:
+  #     - cookshare-network
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   stdin_open: true
+  #   tty: true
+
+  # Database Admin Tool (pgAdmin)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: cookshare-pgadmin-dev
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@cookshare.dev
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./docker/pgadmin/servers.json:/pgadmin4/servers.json
+    networks:
+      - cookshare-network
+    depends_on:
+      - postgres
+
+  # Redis Admin Tool (RedisInsight)
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: cookshare-redisinsight-dev
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    volumes:
+      - redisinsight_data:/db
+    networks:
+      - cookshare-network
+    depends_on:
+      - redis
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  redisinsight_data:
+    driver: local
+
+networks:
+  cookshare-network:
+    driver: bridge
+    name: cookshare-dev-network

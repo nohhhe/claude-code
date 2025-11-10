@@ -1,0 +1,42 @@
+# Multi-stage build for development
+FROM node:20-alpine AS base
+
+# Install pnpm
+RUN npm install -g pnpm@8.15.0
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/ ./packages/
+COPY apps/*/package.json ./apps/*/
+
+# Install all dependencies (including dev dependencies)
+RUN pnpm install --no-frozen-lockfile
+
+# Development stage
+FROM base AS development
+
+# Copy source code
+COPY . .
+
+# Set environment variables for hot reload
+ENV NODE_ENV=development
+ENV CHOKIDAR_USEPOLLING=true
+ENV WATCHPACK_POLLING=true
+
+# Expose port
+EXPOSE 3000
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+# Change ownership of the app directory
+RUN chown -R nextjs:nodejs /app
+USER nextjs
+
+# Change to web app directory and start development server
+WORKDIR /app/apps/web
+CMD ["pnpm", "dev"]

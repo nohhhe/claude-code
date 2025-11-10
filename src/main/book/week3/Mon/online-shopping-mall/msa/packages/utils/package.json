@@ -1,0 +1,26 @@
+{
+  "name": "@shopping-mall/utils",
+  "version": "1.0.0",
+  "description": "Common utilities and helper functions",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@shopping-mall/types": "workspace:*",
+    "dayjs": "^1.11.9",
+    "crypto": "^1.0.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "vitest": "^0.34.0"
+  }
+}

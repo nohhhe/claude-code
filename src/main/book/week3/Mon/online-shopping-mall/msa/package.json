@@ -1,0 +1,66 @@
+{
+  "name": "online-shopping-mall",
+  "version": "1.0.0",
+  "description": "Online Shopping Mall Microservices Monorepo",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "services/*",
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "pnpm --filter @shopping-mall/shared build && pnpm --filter @shopping-mall/ui build && pnpm --filter @shopping-mall/web build && pnpm -r --filter './services/*' build && pnpm -r --filter './apps/*' build",
+    "dev": "pnpm --filter @shopping-mall/shared dev & pnpm --filter @shopping-mall/ui dev & pnpm --filter @shopping-mall/web dev & pnpm -r --filter './services/*' --parallel dev & pnpm -r --filter './apps/*' --parallel dev",
+    "dev:shared": "pnpm --filter @shopping-mall/shared dev",
+    "dev:ui": "pnpm --filter @shopping-mall/ui dev",
+    "dev:web": "pnpm --filter @shopping-mall/web dev",
+    "dev:services": "pnpm -r --filter './services/*' --parallel dev",
+    "dev:apps": "pnpm -r --filter './apps/*' --parallel dev",
+    "dev:gateway": "pnpm --filter api-gateway dev",
+    "start": "pnpm -r --filter './services/*' --parallel start & pnpm -r --filter './apps/*' --parallel start",
+    "test": "pnpm -r test",
+    "test:coverage": "pnpm -r test --coverage",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint --fix",
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,md,yml,yaml}\"",
+    "type-check": "pnpm -r type-check",
+    "clean": "pnpm -r clean && rm -rf node_modules",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged",
+    "postinstall": "echo 'Skipping build in Docker'"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "packageManager": "pnpm@8.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}

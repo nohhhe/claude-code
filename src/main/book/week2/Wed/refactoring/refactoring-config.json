@@ -1,0 +1,62 @@
+{
+  "strategies": [
+    {
+      "name": "extract-functions",
+      "description": "Extract long methods into smaller, focused functions",
+      "priority": 1,
+      "files": [
+        "**/*.js",
+        "**/*.ts",
+        "**/*.py",
+        "**/*.java",
+        "**/*.go"
+      ],
+      "prompt": "Analyze the code and extract overly long functions into smaller, focused functions. Focus on functions with more than 20 lines or multiple responsibilities."
+    },
+    {
+      "name": "remove-duplications",
+      "description": "Identify and eliminate code duplications",
+      "priority": 2,
+      "files": [
+        "**/*"
+      ],
+      "prompt": "Identify duplicated code patterns and create reusable functions or modules. Look for similar code blocks, repeated logic, and common patterns that can be abstracted."
+    },
+    {
+      "name": "improve-naming",
+      "description": "Improve variable, function, and class naming conventions",
+      "priority": 3,
+      "files": [
+        "**/*"
+      ],
+      "prompt": "Review and improve naming conventions. Make variable names, function names, and class names more descriptive and follow language conventions. Rename ambiguous or abbreviated names."
+    },
+    {
+      "name": "simplify-conditionals",
+      "description": "Simplify complex conditional logic",
+      "priority": 4,
+      "files": [
+        "**/*"
+      ],
+      "prompt": "Simplify complex conditional statements. Use guard clauses, extract complex conditions into well-named boolean variables, and reduce nesting levels."
+    },
+    {
+      "name": "optimize-imports",
+      "description": "Organize and optimize import statements",
+      "priority": 5,
+      "files": [
+        "**/*.js",
+        "**/*.ts",
+        "**/*.py",
+        "**/*.java"
+      ],
+      "prompt": "Organize import statements. Remove unused imports, group related imports together, and follow language-specific import conventions."
+    }
+  ],
+  "settings": {
+    "output_to_files": true,
+    "create_backup": true,
+    "simulate_mode": true,
+    "max_concurrent": 1
+  }
+}

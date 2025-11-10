@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cookshare-config
+  namespace: cookshare-local
+  labels:
+    app: cookshare
+    environment: local
+data:
+  # 데이터베이스 연결 설정
+  DATABASE_HOST: "postgres-service"
+  DATABASE_PORT: "5432"
+  DATABASE_NAME: "cookshare"
+  
+  # 애플리케이션 설정
+  NODE_ENV: "development"
+  APP_PORT: "3000"
+  APP_HOST: "0.0.0.0"
+  
+  # API 설정
+  API_VERSION: "v1"
+  API_PREFIX: "/api"
+  
+  # 파일 업로드 설정
+  UPLOAD_MAX_SIZE: "10485760" # 10MB
+  UPLOAD_ALLOWED_TYPES: "image/jpeg,image/png,image/gif,image/webp"
+  
+  # 로깅 설정
+  LOG_LEVEL: "debug"
+  LOG_FORMAT: "combined"
+  
+  # CORS 설정
+  CORS_ORIGIN: "http://localhost:3000,http://cookshare.local"
+  
+  # 세션 설정
+  SESSION_MAX_AGE: "86400000" # 24시간 (밀리초)
+  
+  # 페이지네이션 기본값
+  DEFAULT_PAGE_SIZE: "20"
+  MAX_PAGE_SIZE: "100"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: cookshare-local
+  labels:
+    app: postgres
+    environment: local
+data:
+  # PostgreSQL 설정
+  POSTGRES_DB: "cookshare"
+  POSTGRES_USER: "cookshare"
+  # POSTGRES_PASSWORD는 Secret에서 참조
+  
+  # PostgreSQL 성능 튜닝 (로컬 개발용)
+  shared_buffers: "128MB"
+  effective_cache_size: "256MB"
+  maintenance_work_mem: "64MB"
+  checkpoint_completion_target: "0.7"
+  wal_buffers: "16MB"
+  default_statistics_target: "100"

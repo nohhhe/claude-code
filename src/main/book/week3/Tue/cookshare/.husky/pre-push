@@ -1,0 +1,11 @@
+# Run tests before pushing
+echo "🧪 Running tests before push..."
+npm run test
+
+# Run type checking
+echo "🔍 Running TypeScript type checking..."
+npx tsc --noEmit
+
+# Run build to ensure everything compiles
+echo "🏗️ Running build check..."
+npm run build

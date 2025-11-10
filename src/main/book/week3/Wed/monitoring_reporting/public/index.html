@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테스트 모니터링 대시보드</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>🧪 테스트 모니터링 대시보드</h1>
+            <div class="refresh-info">
+                <span id="lastUpdate">마지막 업데이트: 로딩중...</span>
+                <button id="refreshBtn" class="refresh-btn">🔄 새로고침</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- 요약 카드 섹션 -->
+        <section class="summary-cards">
+            <div class="card">
+                <div class="card-header">
+                    <h3>총 테스트 수</h3>
+                    <span class="icon">🧪</span>
+                </div>
+                <div class="metric-value" id="totalTests">-</div>
+                <div class="metric-change" id="totalTestsChange"></div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>통과율</h3>
+                    <span class="icon">✅</span>
+                </div>
+                <div class="metric-value" id="passRate">-</div>
+                <div class="metric-change" id="passRateChange"></div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>실패한 테스트</h3>
+                    <span class="icon">❌</span>
+                </div>
+                <div class="metric-value" id="failedTests">-</div>
+                <div class="metric-change" id="failedTestsChange"></div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>실행 시간</h3>
+                    <span class="icon">⏱️</span>
+                </div>
+                <div class="metric-value" id="totalTime">-</div>
+                <div class="metric-change" id="totalTimeChange"></div>
+            </div>
+        </section>
+
+        <!-- 차트 섹션 -->
+        <section class="charts-grid">
+            <div class="chart-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>테스트 통과율 추이</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="passRateChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>커버리지 변화</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="coverageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>테스트 실행 시간 분석</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="timeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>현재 커버리지</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="coverageDonut"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 실패한 테스트 목록 -->
+        <section class="failed-tests-section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>실패한 테스트 목록</h3>
+                    <span id="failedTestCount" class="badge">0</span>
+                </div>
+                <div class="failed-tests-list" id="failedTestsList">
+                    <div class="loading">실패한 테스트를 불러오는 중...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 테스트 모니터링 시스템</p>
+        </div>
+    </footer>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

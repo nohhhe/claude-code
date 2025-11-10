@@ -1,0 +1,93 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cookshare-ingress
+  namespace: cookshare-local
+  labels:
+    app: cookshare
+    environment: local
+  annotations:
+    # NGINX Ingress Controller 설정
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "10m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    # CORS 설정
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:3000,http://cookshare.local"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization"
+spec:
+  ingressClassName: nginx
+  rules:
+    # 메인 웹 애플리케이션
+    - host: cookshare.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cookshare-web-service
+                port:
+                  number: 3000
+    
+    # 로컬 개발용 localhost 접근
+    - host: localhost
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cookshare-web-service
+                port:
+                  number: 3000
+---
+# 개발용 추가 Ingress (API 전용) - 필요시 사용
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cookshare-api-ingress
+  namespace: cookshare-local
+  labels:
+    app: cookshare-api
+    environment: local
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    # API 전용 CORS 설정
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://localhost:3000,http://cookshare.local"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-headers: "DNT,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range,Authorization,X-API-Key"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: api.cookshare.local
+      http:
+        paths:
+          # API 엔드포인트
+          - path: /api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: cookshare-web-service  # API가 별도 서비스로 분리되면 변경
+                port:
+                  number: 3000
+    
+    # localhost에서도 API 접근 가능
+    - host: localhost
+      http:
+        paths:
+          - path: /api(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: cookshare-web-service
+                port:
+                  number: 3000

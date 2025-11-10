@@ -1,0 +1,265 @@
+
+services:
+  # Infrastructure Services
+  postgres:
+    image: postgres:15-alpine
+    container_name: shopping-mall-postgres
+    environment:
+      POSTGRES_DB: shopping_mall
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mongodb:
+    image: mongo:7-jammy
+    container_name: shopping-mall-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: shopping_mall
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: shopping-mall-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: shopping-mall-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin123
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Shared Packages (for development)
+  shared:
+    build:
+      context: .
+      dockerfile: packages/shared/Dockerfile
+    volumes:
+      - ./packages/shared:/app/packages/shared
+      - /app/packages/shared/node_modules
+    command: pnpm dev
+
+  ui:
+    build:
+      context: .
+      dockerfile: packages/ui/Dockerfile
+    ports:
+      - "6006:6006"
+    volumes:
+      - ./packages/ui:/app/packages/ui
+      - /app/packages/ui/node_modules
+    depends_on:
+      - shared
+    command: pnpm dev
+
+  # API Gateway
+  gateway:
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+    depends_on:
+      - user-service
+      - product-service
+      - order-service
+    restart: unless-stopped
+
+  # Microservices
+  user-service:
+    build:
+      context: .
+      dockerfile: services/user/Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: shopping_mall
+      REDIS_URL: redis://redis:6379
+      JWT_SECRET: your-jwt-secret
+    volumes:
+      - ./services/user:/app/services/user
+      - ./packages/shared:/app/packages/shared
+      - /app/services/user/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      shared:
+        condition: service_started
+    restart: unless-stopped
+
+  product-service:
+    build:
+      context: .
+      dockerfile: services/product/Dockerfile
+    ports:
+      - "3002:3002"
+    environment:
+      NODE_ENV: development
+      PORT: 3002
+      MONGODB_URI: mongodb://admin:admin123@mongodb:27017/shopping_mall?authSource=admin
+    volumes:
+      - ./services/product:/app/services/product
+      - ./packages/shared:/app/packages/shared
+      - /app/services/product/node_modules
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      shared:
+        condition: service_started
+    restart: unless-stopped
+
+  order-service:
+    build:
+      context: .
+      dockerfile: services/order/Dockerfile
+    ports:
+      - "3003:3003"
+    environment:
+      NODE_ENV: development
+      PORT: 3003
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: shopping_mall
+      RABBITMQ_URL: amqp://admin:admin123@rabbitmq:5672
+    volumes:
+      - ./services/order:/app/services/order
+      - ./packages/shared:/app/packages/shared
+      - /app/services/order/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      shared:
+        condition: service_started
+    restart: unless-stopped
+
+  payment-service:
+    build:
+      context: .
+      dockerfile: services/payment/Dockerfile
+    ports:
+      - "3004:3004"
+    environment:
+      NODE_ENV: development
+      PORT: 3004
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: shopping_mall
+      RABBITMQ_URL: amqp://admin:admin123@rabbitmq:5672
+      STRIPE_SECRET_KEY: your-stripe-secret-key
+    volumes:
+      - ./services/payment:/app/services/payment
+      - ./packages/shared:/app/packages/shared
+      - /app/services/payment/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      shared:
+        condition: service_started
+    restart: unless-stopped
+
+  # Frontend Applications
+  web-app:
+    build:
+      context: .
+      dockerfile: packages/web/Dockerfile
+    ports:
+      - "3100:3100"
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:3000/api/v1
+    volumes:
+      - ./packages/web:/app/packages/web
+      - ./packages/shared:/app/packages/shared
+      - ./packages/ui:/app/packages/ui
+      - /app/packages/web/node_modules
+      - /app/packages/web/.next
+    depends_on:
+      - gateway
+      - shared
+      - ui
+    restart: unless-stopped
+
+  admin-app:
+    build:
+      context: .
+      dockerfile: apps/admin/Dockerfile
+    ports:
+      - "3200:3200"
+    environment:
+      NODE_ENV: development
+      REACT_APP_API_URL: http://localhost:3000/api/v1
+    volumes:
+      - ./apps/admin:/app/apps/admin
+      - ./packages/shared:/app/packages/shared
+      - ./packages/ui:/app/packages/ui
+      - /app/apps/admin/node_modules
+    depends_on:
+      - gateway
+      - shared
+      - ui
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  mongodb_data:
+  redis_data:
+  rabbitmq_data:
+
+networks:
+  default:
+    driver: bridge

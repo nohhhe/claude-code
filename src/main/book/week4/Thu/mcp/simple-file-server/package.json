@@ -1,0 +1,21 @@
+{
+  "name": "simple-file-server",
+  "version": "0.1.0",
+  "description": "Simple MCP server for file operations",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "simple-file-server": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "",
+  "license": "MIT"
+}

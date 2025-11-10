@@ -1,0 +1,30 @@
+{
+  "name": "tech-debt-example",
+  "version": "1.0.0",
+  "description": "Example project demonstrating various forms of technical debt",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest",
+    "lint": "eslint src/",
+    "dev": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.5.0",
+    "bcrypt": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.4",
+    "request": "^2.88.2",
+    "async": "^3.2.4"
+  },
+  "devDependencies": {
+    "jest": "^29.6.2",
+    "eslint": "^8.47.0",
+    "nodemon": "^3.0.1"
+  },
+  "keywords": ["technical-debt", "legacy", "example"],
+  "author": "Tech Debt Example",
+  "license": "MIT"
+}

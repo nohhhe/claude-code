@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Order Management System</title>
+    <link rel="stylesheet" href="legacy-styles.css">
+    <!-- jQuery 1.x 사용 -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- 오래된 라이브러리들 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <h1>주문 관리 시스템</h1>
+            <div id="user-info"></div>
+        </header>
+        
+        <main>
+            <!-- 사용자 관리 섹션 -->
+            <section id="user-section">
+                <h2>사용자 관리</h2>
+                <form id="user-form" onsubmit="return false;">
+                    <input type="text" id="username" placeholder="사용자명" />
+                    <input type="email" id="email" placeholder="이메일" />
+                    <input type="password" id="password" placeholder="비밀번호" />
+                    <button onclick="handleUserAction('register')" type="button">회원가입</button>
+                    <button onclick="handleUserAction('login')" type="button">로그인</button>
+                </form>
+                <div id="user-list"></div>
+            </section>
+            
+            <!-- 주문 관리 섹션 -->
+            <section id="order-section">
+                <h2>주문 관리</h2>
+                <form id="order-form" onsubmit="return false;">
+                    <select id="product-select">
+                        <option value="">상품 선택</option>
+                        <option value="laptop">노트북</option>
+                        <option value="mouse">마우스</option>
+                        <option value="keyboard">키보드</option>
+                    </select>
+                    <input type="number" id="quantity" placeholder="수량" min="1" />
+                    <button onclick="addToOrder()" type="button">주문에 추가</button>
+                </form>
+                
+                <div id="current-order">
+                    <h3>현재 주문</h3>
+                    <div id="order-items"></div>
+                    <div id="order-total">총액: 0원</div>
+                    <button onclick="submitOrder()" type="button" id="submit-order-btn" disabled>주문 완료</button>
+                </div>
+                
+                <div id="order-history">
+                    <h3>주문 내역</h3>
+                    <div id="order-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- 전역 변수들과 인라인 스크립트 -->
+    <script>
+        // 전역 변수 오염 예제
+        var currentUser = null;
+        var orders = [];
+        var products = {
+            'laptop': { name: '노트북', price: 1200000 },
+            'mouse': { name: '마우스', price: 30000 },
+            'keyboard': { name: '키보드', price: 80000 }
+        };
+        var currentOrder = { items: [], total: 0 };
+        var userController;
+        var orderService;
+        
+        // DOM 준비 시 초기화
+        $(document).ready(function() {
+            // 인라인 초기화
+            initApp();
+        });
+    </script>
+    
+    <!-- 메인 애플리케이션 로드 -->
+    <script src="legacy-app.js"></script>
+</body>
+</html>

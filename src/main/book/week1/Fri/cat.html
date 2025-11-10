@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>귀여운 고양이</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #764ba2;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .cat-container {
+            position: relative;
+            margin: 30px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        #catImage {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .loading {
+            padding: 60px;
+            color: #764ba2;
+            font-size: 1.2em;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(118, 75, 162, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #555;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐱 랜덤 고양이 갤러리</h1>
+        <div class="emoji">😺 😸 😻</div>
+
+        <div class="cat-container">
+            <div id="catImage" class="loading">고양이를 불러오는 중...</div>
+        </div>
+
+        <button onclick="loadNewCat()">새로운 고양이 보기</button>
+        <button onclick="downloadCat()">이미지 저장</button>
+
+        <div class="info">
+            <p><strong>💡 팁:</strong> 버튼을 클릭하여 랜덤한 고양이 사진을 감상하세요!</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">이미지 제공: The Cat API</p>
+        </div>
+    </div>
+
+    <script>
+        let currentCatUrl = '';
+
+        // 페이지 로드 시 고양이 이미지 불러오기
+        window.onload = function() {
+            loadNewCat();
+        };
+
+        // 새로운 고양이 이미지 불러오기
+        function loadNewCat() {
+            const catImage = document.getElementById('catImage');
+            catImage.innerHTML = '<div class="loading">고양이를 불러오는 중...</div>';
+
+            // The Cat API 사용 (무료 API)
+            fetch('https://api.thecatapi.com/v1/images/search')
+                .then(response => response.json())
+                .then(data => {
+                    currentCatUrl = data[0].url;
+                    catImage.innerHTML = `<img src="${currentCatUrl}" alt="귀여운 고양이" style="width: 100%; height: auto;">`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    catImage.innerHTML = '<div class="loading">고양이를 불러오는데 실패했습니다. 😿<br>다시 시도해주세요.</div>';
+                });
+        }
+
+        // 이미지 다운로드
+        function downloadCat() {
+            if (!currentCatUrl) {
+                alert('먼저 고양이 이미지를 불러와주세요!');
+                return;
+            }
+
+            fetch(currentCatUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `cat-${Date.now()}.jpg`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error('Download error:', error);
+                    alert('다운로드에 실패했습니다.');
+                });
+        }
+    </script>
+</body>
+</html>

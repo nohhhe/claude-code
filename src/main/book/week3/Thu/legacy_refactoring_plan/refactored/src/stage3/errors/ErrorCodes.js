@@ -1,0 +1,132 @@
+// Stage 3: 에러 코드 상수 정의
+const ErrorCodes = {
+    // 유효성 검증 에러
+    VALIDATION_USERNAME_REQUIRED: 'VALIDATION_USERNAME_REQUIRED',
+    VALIDATION_USERNAME_TOO_SHORT: 'VALIDATION_USERNAME_TOO_SHORT',
+    VALIDATION_EMAIL_REQUIRED: 'VALIDATION_EMAIL_REQUIRED',
+    VALIDATION_EMAIL_INVALID: 'VALIDATION_EMAIL_INVALID',
+    VALIDATION_PASSWORD_REQUIRED: 'VALIDATION_PASSWORD_REQUIRED',
+    VALIDATION_PASSWORD_TOO_SHORT: 'VALIDATION_PASSWORD_TOO_SHORT',
+    VALIDATION_PASSWORD_TOO_WEAK: 'VALIDATION_PASSWORD_TOO_WEAK',
+
+    // 인증 에러
+    AUTH_INVALID_CREDENTIALS: 'AUTH_INVALID_CREDENTIALS',
+    AUTH_USER_NOT_FOUND: 'AUTH_USER_NOT_FOUND',
+    AUTH_ACCOUNT_INACTIVE: 'AUTH_ACCOUNT_INACTIVE',
+    AUTH_INSUFFICIENT_PERMISSIONS: 'AUTH_INSUFFICIENT_PERMISSIONS',
+    AUTH_SESSION_EXPIRED: 'AUTH_SESSION_EXPIRED',
+
+    // 사용자 관리 에러
+    USER_ALREADY_EXISTS: 'USER_ALREADY_EXISTS',
+    USER_NOT_FOUND: 'USER_NOT_FOUND',
+    USER_CREATION_FAILED: 'USER_CREATION_FAILED',
+    USER_UPDATE_FAILED: 'USER_UPDATE_FAILED',
+    USER_DELETE_FAILED: 'USER_DELETE_FAILED',
+
+    // 데이터베이스 에러
+    DATABASE_CONNECTION_ERROR: 'DATABASE_CONNECTION_ERROR',
+    DATABASE_QUERY_ERROR: 'DATABASE_QUERY_ERROR',
+    DATABASE_TRANSACTION_ERROR: 'DATABASE_TRANSACTION_ERROR',
+
+    // 이메일 서비스 에러
+    EMAIL_SERVICE_UNAVAILABLE: 'EMAIL_SERVICE_UNAVAILABLE',
+    EMAIL_SEND_FAILED: 'EMAIL_SEND_FAILED',
+    EMAIL_INVALID_ADDRESS: 'EMAIL_INVALID_ADDRESS',
+
+    // 시스템 에러
+    INTERNAL_SERVER_ERROR: 'INTERNAL_SERVER_ERROR',
+    SERVICE_UNAVAILABLE: 'SERVICE_UNAVAILABLE',
+    RATE_LIMIT_EXCEEDED: 'RATE_LIMIT_EXCEEDED',
+    
+    // 보안 에러
+    SECURITY_SUSPICIOUS_ACTIVITY: 'SECURITY_SUSPICIOUS_ACTIVITY',
+    SECURITY_BRUTE_FORCE_DETECTED: 'SECURITY_BRUTE_FORCE_DETECTED',
+    SECURITY_INVALID_TOKEN: 'SECURITY_INVALID_TOKEN'
+};
+
+// 에러 코드별 기본 메시지 매핑
+const ErrorMessages = {
+    [ErrorCodes.VALIDATION_USERNAME_REQUIRED]: '사용자명을 입력해주세요.',
+    [ErrorCodes.VALIDATION_USERNAME_TOO_SHORT]: '사용자명은 2자 이상이어야 합니다.',
+    [ErrorCodes.VALIDATION_EMAIL_REQUIRED]: '이메일을 입력해주세요.',
+    [ErrorCodes.VALIDATION_EMAIL_INVALID]: '유효한 이메일 주소를 입력해주세요.',
+    [ErrorCodes.VALIDATION_PASSWORD_REQUIRED]: '비밀번호를 입력해주세요.',
+    [ErrorCodes.VALIDATION_PASSWORD_TOO_SHORT]: '비밀번호는 4자 이상이어야 합니다.',
+    [ErrorCodes.VALIDATION_PASSWORD_TOO_WEAK]: '비밀번호가 너무 약합니다. 더 강한 비밀번호를 사용해주세요.',
+
+    [ErrorCodes.AUTH_INVALID_CREDENTIALS]: '이메일 또는 비밀번호가 올바르지 않습니다.',
+    [ErrorCodes.AUTH_USER_NOT_FOUND]: '사용자를 찾을 수 없습니다.',
+    [ErrorCodes.AUTH_ACCOUNT_INACTIVE]: '계정이 비활성화되었습니다. 관리자에게 문의하세요.',
+    [ErrorCodes.AUTH_INSUFFICIENT_PERMISSIONS]: '이 작업을 수행할 권한이 없습니다.',
+    [ErrorCodes.AUTH_SESSION_EXPIRED]: '세션이 만료되었습니다. 다시 로그인해주세요.',
+
+    [ErrorCodes.USER_ALREADY_EXISTS]: '이미 존재하는 사용자입니다.',
+    [ErrorCodes.USER_NOT_FOUND]: '사용자를 찾을 수 없습니다.',
+    [ErrorCodes.USER_CREATION_FAILED]: '사용자 생성에 실패했습니다.',
+    [ErrorCodes.USER_UPDATE_FAILED]: '사용자 정보 업데이트에 실패했습니다.',
+    [ErrorCodes.USER_DELETE_FAILED]: '사용자 삭제에 실패했습니다.',
+
+    [ErrorCodes.DATABASE_CONNECTION_ERROR]: '데이터베이스 연결에 실패했습니다.',
+    [ErrorCodes.DATABASE_QUERY_ERROR]: '데이터베이스 쿼리 실행에 실패했습니다.',
+    [ErrorCodes.DATABASE_TRANSACTION_ERROR]: '데이터베이스 트랜잭션 처리에 실패했습니다.',
+
+    [ErrorCodes.EMAIL_SERVICE_UNAVAILABLE]: '이메일 서비스를 사용할 수 없습니다.',
+    [ErrorCodes.EMAIL_SEND_FAILED]: '이메일 발송에 실패했습니다.',
+    [ErrorCodes.EMAIL_INVALID_ADDRESS]: '유효하지 않은 이메일 주소입니다.',
+
+    [ErrorCodes.INTERNAL_SERVER_ERROR]: '내부 서버 오류가 발생했습니다.',
+    [ErrorCodes.SERVICE_UNAVAILABLE]: '서비스를 일시적으로 사용할 수 없습니다.',
+    [ErrorCodes.RATE_LIMIT_EXCEEDED]: '요청 한도를 초과했습니다. 잠시 후 다시 시도해주세요.',
+
+    [ErrorCodes.SECURITY_SUSPICIOUS_ACTIVITY]: '의심스러운 활동이 감지되었습니다.',
+    [ErrorCodes.SECURITY_BRUTE_FORCE_DETECTED]: '무차별 대입 공격이 감지되었습니다. 계정이 일시적으로 잠겼습니다.',
+    [ErrorCodes.SECURITY_INVALID_TOKEN]: '유효하지 않은 토큰입니다.'
+};
+
+// 에러 코드별 HTTP 상태 코드 매핑
+const StatusCodes = {
+    // 4xx Client Errors
+    [ErrorCodes.VALIDATION_USERNAME_REQUIRED]: 400,
+    [ErrorCodes.VALIDATION_USERNAME_TOO_SHORT]: 400,
+    [ErrorCodes.VALIDATION_EMAIL_REQUIRED]: 400,
+    [ErrorCodes.VALIDATION_EMAIL_INVALID]: 400,
+    [ErrorCodes.VALIDATION_PASSWORD_REQUIRED]: 400,
+    [ErrorCodes.VALIDATION_PASSWORD_TOO_SHORT]: 400,
+    [ErrorCodes.VALIDATION_PASSWORD_TOO_WEAK]: 400,
+
+    [ErrorCodes.AUTH_INVALID_CREDENTIALS]: 401,
+    [ErrorCodes.AUTH_USER_NOT_FOUND]: 401,
+    [ErrorCodes.AUTH_ACCOUNT_INACTIVE]: 401,
+    [ErrorCodes.AUTH_INSUFFICIENT_PERMISSIONS]: 403,
+    [ErrorCodes.AUTH_SESSION_EXPIRED]: 401,
+
+    [ErrorCodes.USER_ALREADY_EXISTS]: 409,
+    [ErrorCodes.USER_NOT_FOUND]: 404,
+
+    [ErrorCodes.RATE_LIMIT_EXCEEDED]: 429,
+    [ErrorCodes.SECURITY_SUSPICIOUS_ACTIVITY]: 403,
+    [ErrorCodes.SECURITY_BRUTE_FORCE_DETECTED]: 403,
+    [ErrorCodes.SECURITY_INVALID_TOKEN]: 401,
+
+    // 5xx Server Errors
+    [ErrorCodes.USER_CREATION_FAILED]: 500,
+    [ErrorCodes.USER_UPDATE_FAILED]: 500,
+    [ErrorCodes.USER_DELETE_FAILED]: 500,
+
+    [ErrorCodes.DATABASE_CONNECTION_ERROR]: 503,
+    [ErrorCodes.DATABASE_QUERY_ERROR]: 500,
+    [ErrorCodes.DATABASE_TRANSACTION_ERROR]: 500,
+
+    [ErrorCodes.EMAIL_SERVICE_UNAVAILABLE]: 503,
+    [ErrorCodes.EMAIL_SEND_FAILED]: 500,
+    [ErrorCodes.EMAIL_INVALID_ADDRESS]: 400,
+
+    [ErrorCodes.INTERNAL_SERVER_ERROR]: 500,
+    [ErrorCodes.SERVICE_UNAVAILABLE]: 503
+};
+
+module.exports = {
+    ErrorCodes,
+    ErrorMessages,
+    StatusCodes
+};

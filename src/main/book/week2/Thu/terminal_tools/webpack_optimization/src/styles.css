@@ -1,0 +1,135 @@
+/* Unoptimized CSS with redundant rules and unused styles */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #555;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #666;
+    margin-top: 30px;
+}
+
+.features {
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features li {
+    background-color: #fff;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.demo-section {
+    margin: 30px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#myChart {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+}
+
+#current-time {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #007bff;
+}
+
+#result {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    min-height: 50px;
+    border-left: 4px solid #28a745;
+}
+
+/* Unused styles that should be removed */
+.unused-class1 {
+    background-color: red;
+    color: white;
+}
+
+.unused-class2 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.unused-class3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Redundant styles */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* More unused styles */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #343a40;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
