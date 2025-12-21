@@ -1,0 +1,40 @@
+# General
+.DS_Store
+*.log
+*.tmp
+
+# Backend (Gradle + Kotlin)
+backend/.gradle/
+backend/build/
+backend/out/
+backend/bin/
+backend/.idea/
+backend/*.iml
+backend/*.iws
+backend/*.ipr
+backend/.settings/
+backend/.classpath
+backend/.project
+
+# Frontend (Next.js + Node)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/dist/
+frontend/.env*.local
+frontend/.vercel
+frontend/.turbo
+
+# Database
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Docker
+docker/data/
