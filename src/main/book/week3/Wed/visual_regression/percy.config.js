@@ -6,29 +6,49 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 2 : 1,
-  reporter: 'list',
-  
+  reporter: [
+    ['list'],
+    ['html', { open: 'never' }],
+  ],
+
   use: {
     baseURL: 'http://localhost:3000',
     trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
   },
 
   projects: [
+    // Desktop Chrome
     {
-      name: 'percy-chromium',
-      use: { 
+      name: 'percy-desktop',
+      use: {
         ...devices['Desktop Chrome'],
-        viewport: { width: 1280, height: 720 }
+        viewport: { width: 1280, height: 720 },
       },
     },
+    // Tablet
+    {
+      name: 'percy-tablet',
+      use: {
+        ...devices['iPad Pro'],
+        viewport: { width: 768, height: 1024 },
+      },
+    },
+    // Mobile
     {
       name: 'percy-mobile',
-      use: { 
+      use: {
         ...devices['iPhone 12'],
-        viewport: { width: 390, height: 844 }
+        viewport: { width: 390, height: 844 },
       },
     },
   ],
 
-  // webServer disabled - using existing server
+  // Web server configuration
+  webServer: {
+    command: 'npm start',
+    url: 'http://localhost:3000',
+    reuseExistingServer: !process.env.CI,
+    timeout: 120 * 1000,
+  },
 });

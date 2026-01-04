@@ -25,23 +25,40 @@
       },
       "testResults": [
         {
-          "ancestorTitles": [
-            "User Service"
-          ],
+          "ancestorTitles": ["User Service"],
           "title": "should create user successfully",
           "status": "passed",
           "duration": 45
         },
         {
-          "ancestorTitles": [
-            "User Service"
-          ],
+          "ancestorTitles": ["User Service"],
           "title": "should validate email format",
           "status": "failed",
           "duration": 78,
           "failureMessages": [
-            "Expected email validation to fail for invalid format"
+            "AssertionError: Expected email validation to fail for invalid format\n    at Object.<anonymous> (tests/user.test.js:45:12)\n    Expected: false\n    Received: true"
           ]
+        },
+        {
+          "ancestorTitles": ["User Service", "Password Validation"],
+          "title": "should reject weak passwords",
+          "status": "failed",
+          "duration": 56,
+          "failureMessages": [
+            "Error: Password '12345' should be rejected but was accepted\n    at validatePassword (tests/user.test.js:78:8)"
+          ]
+        },
+        {
+          "ancestorTitles": ["User Service"],
+          "title": "should hash password correctly",
+          "status": "passed",
+          "duration": 123
+        },
+        {
+          "ancestorTitles": ["User Service"],
+          "title": "should find user by email",
+          "status": "passed",
+          "duration": 34
         }
       ]
     },
@@ -55,25 +72,89 @@
       },
       "testResults": [
         {
-          "ancestorTitles": [
-            "Authentication"
-          ],
+          "ancestorTitles": ["Authentication"],
           "title": "should login with valid credentials",
           "status": "passed",
           "duration": 123
         },
         {
-          "ancestorTitles": [
-            "Authentication"
-          ],
+          "ancestorTitles": ["Authentication"],
           "title": "should handle token expiration",
           "status": "failed",
           "duration": 67,
           "failureMessages": [
-            "Token expiration not handled correctly"
+            "TimeoutError: Token expiration not handled correctly\n    at handleTokenExpiry (tests/auth.test.js:156:10)\n    - Expected token to be invalidated after 3600ms\n    - Actual: Token still valid after 4000ms"
           ]
+        },
+        {
+          "ancestorTitles": ["Authentication"],
+          "title": "should refresh token successfully",
+          "status": "passed",
+          "duration": 89
+        },
+        {
+          "ancestorTitles": ["Authentication"],
+          "title": "should logout user",
+          "status": "passed",
+          "duration": 45
+        }
+      ]
+    },
+    {
+      "testFilePath": "./tests/api.test.js",
+      "numFailingTests": 2,
+      "numPassingTests": 15,
+      "numPendingTests": 0,
+      "perfStats": {
+        "runtime": 3468
+      },
+      "testResults": [
+        {
+          "ancestorTitles": ["API Endpoints", "GET /users"],
+          "title": "should return paginated users",
+          "status": "passed",
+          "duration": 234
+        },
+        {
+          "ancestorTitles": ["API Endpoints", "POST /users"],
+          "title": "should handle concurrent requests",
+          "status": "failed",
+          "duration": 456,
+          "failureMessages": [
+            "ConcurrencyError: Race condition detected in user creation\n    at createUser (tests/api.test.js:234:14)\n    - Request 1: Created user with id 123\n    - Request 2: Expected unique id, got 123"
+          ]
+        },
+        {
+          "ancestorTitles": ["API Endpoints", "DELETE /users/:id"],
+          "title": "should handle non-existent user deletion",
+          "status": "failed",
+          "duration": 89,
+          "failureMessages": [
+            "AssertionError: Expected 404 status code but received 500\n    at deleteUser (tests/api.test.js:312:8)\n    Expected: 404\n    Received: 500"
+          ]
+        },
+        {
+          "ancestorTitles": ["API Endpoints", "PUT /users/:id"],
+          "title": "should update user profile",
+          "status": "passed",
+          "duration": 156
         }
       ]
     }
-  ]
+  ],
+  "performanceMetrics": {
+    "slowestTests": [
+      {"name": "POST /users - should handle concurrent requests", "duration": 456, "file": "./tests/api.test.js"},
+      {"name": "GET /users - should return paginated users", "duration": 234, "file": "./tests/api.test.js"},
+      {"name": "PUT /users/:id - should update user profile", "duration": 156, "file": "./tests/api.test.js"},
+      {"name": "should hash password correctly", "duration": 123, "file": "./tests/user.test.js"},
+      {"name": "should login with valid credentials", "duration": 123, "file": "./tests/auth.test.js"}
+    ],
+    "avgTestDuration": 131.7,
+    "testsByFile": [
+      {"file": "./tests/api.test.js", "count": 17, "duration": 3468, "passRate": 88.2},
+      {"file": "./tests/auth.test.js", "count": 13, "duration": 2134, "passRate": 92.3},
+      {"file": "./tests/user.test.js", "count": 10, "duration": 1245, "passRate": 80.0}
+    ]
+  }
 }

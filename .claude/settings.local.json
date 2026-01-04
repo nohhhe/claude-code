@@ -38,7 +38,21 @@
       "Bash(curl -s \"http://localhost:8080/api/cycles/stats\" -H \"Authorization: Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIiwiaWF0IjoxNzY2MzA1MjgzLCJleHAiOjE3NjYzOTE2ODN9.CyqKYsO8SvEPMfjiVYJzyNvu6D4ykxQBpEbcFVxT0Fa0kSUQcVGbdqtRAPAx8wU_\")",
       "Bash(psql -d period_tracker -c \"SELECT c.id, c.user_id, c.start_date, c.end_date, c.cycle_length FROM cycles c JOIN users u ON c.user_id = u.id;\")",
       "Bash(psql -d period_tracker -c \"SELECT id, email, name FROM users;\")",
-      "Bash(psql -d period_tracker -c \"SELECT id, start_date, end_date, cycle_length, period_length FROM cycles ORDER BY start_date DESC;\")"
+      "Bash(psql -d period_tracker -c \"SELECT id, start_date, end_date, cycle_length, period_length FROM cycles ORDER BY start_date DESC;\")",
+      "Bash(git config user.name)",
+      "Bash(git config user.email)",
+      "Bash(git config user.name \"nohhhe\")",
+      "Bash(git config user.email \"hyunho028@gmail.com\")",
+      "Bash(git commit --amend --author=\"nohhhe <hyunho028@gmail.com>\" --no-edit)",
+      "Bash(brew services:*)",
+      "Bash(lsof:*)",
+      "Bash(curl:*)",
+      "Bash(psql:*)",
+      "Bash(kill:*)",
+      "Bash(npm start)",
+      "Bash(python3:*)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(claude /install-github-app)"
     ],
     "deny": [],
     "ask": []

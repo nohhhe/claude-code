@@ -249,6 +249,207 @@ main {
     font-weight: 500;
 }
 
+/* 통계 섹션 */
+.stats-section {
+    margin-bottom: 30px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.stat-value.danger {
+    color: #e74c3c;
+}
+
+.stat-value.success {
+    color: #27ae60;
+}
+
+.stat-value.warning {
+    color: #f39c12;
+}
+
+/* 느린 테스트 섹션 */
+.slow-tests-section {
+    margin-bottom: 30px;
+}
+
+.slow-tests-list {
+    padding: 0;
+}
+
+.slow-test-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f1f3f4;
+    gap: 15px;
+}
+
+.slow-test-item:last-child {
+    border-bottom: none;
+}
+
+.slow-test-item:hover {
+    background: #f8f9fa;
+}
+
+.slow-test-rank {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #7f8c8d;
+    min-width: 40px;
+}
+
+.slow-test-info {
+    flex: 1;
+}
+
+.slow-test-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.slow-test-file {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    font-family: 'Courier New', monospace;
+}
+
+.slow-test-duration {
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    background: #e8f5e9;
+    color: #27ae60;
+}
+
+.slow-test-duration.warning {
+    background: #fff3e0;
+    color: #f39c12;
+}
+
+.slow-test-duration.danger {
+    background: #ffebee;
+    color: #e74c3c;
+}
+
+/* 파일별 통계 섹션 */
+.file-stats-section {
+    margin-bottom: 30px;
+}
+
+.file-stats-list {
+    padding: 0;
+}
+
+.file-stat-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #f1f3f4;
+    gap: 20px;
+}
+
+.file-stat-item:last-child {
+    border-bottom: none;
+}
+
+.file-stat-item:hover {
+    background: #f8f9fa;
+}
+
+.file-stat-info {
+    flex: 1;
+}
+
+.file-stat-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 4px;
+}
+
+.file-stat-details {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
+    color: #7f8c8d;
+}
+
+.file-stat-count {
+    color: #3498db;
+}
+
+.file-stat-duration {
+    color: #9b59b6;
+}
+
+.file-stat-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-fill.success {
+    background: linear-gradient(90deg, #27ae60, #2ecc71);
+}
+
+.progress-fill.warning {
+    background: linear-gradient(90deg, #f39c12, #f1c40f);
+}
+
+.progress-fill.danger {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.progress-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    min-width: 50px;
+    text-align: right;
+}
+
 /* 푸터 */
 .footer {
     background: #2c3e50;

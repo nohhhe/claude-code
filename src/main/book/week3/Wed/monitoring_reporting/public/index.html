@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>테스트 모니터링 대시보드</title>
     <link rel="stylesheet" href="css/dashboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+    <script src="js/chart.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -30,7 +29,7 @@
                 <div class="metric-value" id="totalTests">-</div>
                 <div class="metric-change" id="totalTestsChange"></div>
             </div>
-            
+
             <div class="card">
                 <div class="card-header">
                     <h3>통과율</h3>
@@ -39,7 +38,7 @@
                 <div class="metric-value" id="passRate">-</div>
                 <div class="metric-change" id="passRateChange"></div>
             </div>
-            
+
             <div class="card">
                 <div class="card-header">
                     <h3>실패한 테스트</h3>
@@ -48,7 +47,7 @@
                 <div class="metric-value" id="failedTests">-</div>
                 <div class="metric-change" id="failedTestsChange"></div>
             </div>
-            
+
             <div class="card">
                 <div class="card-header">
                     <h3>실행 시간</h3>
@@ -64,40 +63,40 @@
             <div class="chart-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>테스트 통과율 추이</h3>
+                        <h3>📈 테스트 통과율 추이</h3>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="passRateChart"></canvas>
                     </div>
                 </div>
             </div>
-            
+
             <div class="chart-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>커버리지 변화</h3>
+                        <h3>📊 커버리지 변화</h3>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="coverageChart"></canvas>
                     </div>
                 </div>
             </div>
-            
+
             <div class="chart-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>테스트 실행 시간 분석</h3>
+                        <h3>⏱️ 테스트 실행 시간 분석</h3>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="timeChart"></canvas>
                     </div>
                 </div>
             </div>
-            
+
             <div class="chart-container">
                 <div class="card">
                     <div class="card-header">
-                        <h3>현재 커버리지</h3>
+                        <h3>🎯 현재 커버리지</h3>
                     </div>
                     <div class="chart-wrapper">
                         <canvas id="coverageDonut"></canvas>
@@ -106,11 +105,62 @@
             </div>
         </section>
 
+        <!-- 테스트 실행 시간 통계 -->
+        <section class="stats-section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>⚡ 테스트 실행 시간 통계</h3>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">평균 실행 시간</div>
+                        <div class="stat-value" id="avgTime">-</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">최대 실행 시간</div>
+                        <div class="stat-value danger" id="maxTime">-</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">최소 실행 시간</div>
+                        <div class="stat-value success" id="minTime">-</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">표준 편차</div>
+                        <div class="stat-value" id="stdDev">-</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 느린 테스트 목록 -->
+        <section class="slow-tests-section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>🐢 가장 느린 테스트 Top 5</h3>
+                </div>
+                <div class="slow-tests-list" id="slowTestsList">
+                    <div class="loading">로딩 중...</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 파일별 테스트 현황 -->
+        <section class="file-stats-section">
+            <div class="card">
+                <div class="card-header">
+                    <h3>📁 파일별 테스트 현황</h3>
+                </div>
+                <div class="file-stats-list" id="fileStatsList">
+                    <div class="loading">로딩 중...</div>
+                </div>
+            </div>
+        </section>
+
         <!-- 실패한 테스트 목록 -->
         <section class="failed-tests-section">
             <div class="card">
                 <div class="card-header">
-                    <h3>실패한 테스트 목록</h3>
+                    <h3>❌ 실패한 테스트 목록</h3>
                     <span id="failedTestCount" class="badge">0</span>
                 </div>
                 <div class="failed-tests-list" id="failedTestsList">
@@ -122,7 +172,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 테스트 모니터링 시스템</p>
+            <p>© 2024 테스트 모니터링 시스템 | 자동 업데이트: 30초</p>
         </div>
     </footer>
 
